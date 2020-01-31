@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "176574287486",
+    "firebase_url": "https://cinema-app-30c32.firebaseio.com",
+    "project_id": "cinema-app-30c32",
+    "storage_bucket": "cinema-app-30c32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176574287486:android:d4a75d226c02b4799c522f",
+        "android_client_info": {
+          "package_name": "com.example.cinema"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "176574287486-3k46ul057gkopj7lcquctsetk7h4gmt6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKCFGCI9Y2mMG8rgzNwniKvq6X_6ne2r4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "176574287486-3k46ul057gkopj7lcquctsetk7h4gmt6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
