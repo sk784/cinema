@@ -174,7 +174,7 @@ class _InputCode extends State<InputCode> {
           print(response.body);
           print(response.statusCode);
         });
-        Navigator.push(context,
+        Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => Profile(
                 oldPassword: widget.password)));
       }

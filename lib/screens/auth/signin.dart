@@ -1,4 +1,5 @@
 import 'package:cinema/model/api_client.dart';
+import 'package:cinema/model/entity/login.dart';
 import 'package:cinema/model/response/user_response.dart';
 import 'package:cinema/screens/auth/registration.dart';
 import 'package:cinema/screens/auth/restore_password.dart';
@@ -30,6 +31,7 @@ class SignIn extends StatefulWidget {
   bool _obscureText = true;
   bool _isLoading = false;
   String _token;
+  String _fcmToken;
   String _deviceId = "";
   bool _autoValidatePhone = false;
   bool _autoValidatePass = false;
@@ -233,17 +235,10 @@ class SignIn extends StatefulWidget {
       currentFocus.unfocus();
     }
 
-    var body = jsonEncode({
-      "appId": _guestUserApi.appId,
-      "phone": "+7"+_tecPhone.text.replaceAll("(", "").
-      replaceAll(")", "").replaceAll("-", ""),
-      "password": _tecPass.text,
-      "deviceId": _deviceId,
-      "fcmToken": _token
-    });
-
-    var data = json.encode(body);
-    print(data);
+    Login login = Login(_guestUserApi.appId,"+7"+_tecPhone.text.replaceAll("(", "")
+        .replaceAll(")", "").replaceAll("-", ""), _tecPass.text,_deviceId,_fcmToken);
+    String jsonLogin = jsonEncode(login);
+    print(jsonLogin);
 
       void _processResponse(http.Response response) {
         if(response.statusCode == 200){
@@ -255,9 +250,11 @@ class SignIn extends StatefulWidget {
             print(_token);
            _guestUserApi.setMobileToken(_token);
           });
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()));
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+                (Route<dynamic> route) => false,
+          );
         }
         else if (response.statusCode == 401){
           print(response.statusCode);
@@ -277,7 +274,7 @@ class SignIn extends StatefulWidget {
         }
       }
 
-    _guestUserApi.userLogin(body).then((_processResponse))
+    _guestUserApi.userLogin(jsonLogin).then((_processResponse))
         .catchError((error){
       _scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text("Неизвестная ошибка"),
@@ -319,7 +316,7 @@ class SignIn extends StatefulWidget {
       final FirebaseMessaging _fireBaseMessaging = FirebaseMessaging();
       _fireBaseMessaging.getToken().then((token) {
         print(token);
-        _token = token;
+        _fcmToken = token;
       });
     });
  }

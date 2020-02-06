@@ -263,8 +263,11 @@ class _RestorePassword extends State<RestorePassword> {
             _guestUserApi.setMobileToken(_token);
           });
 
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => HomePage()));
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+                (Route<dynamic> route) => false,
+          );
         }
         else if (response.statusCode == 404) {
           setState(() {

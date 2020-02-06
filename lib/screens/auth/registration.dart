@@ -225,7 +225,7 @@ class _Registration extends State<Registration> {
       "appId":  _guestUserApi.appId,
       "phone": "+7"+_tecPhone.text.replaceAll("(", "").
       replaceAll(")", "").replaceAll("-", ""),
-      "password": _tecPass.text,
+      "password": _password,
     });
 
     var data = json.encode(body);

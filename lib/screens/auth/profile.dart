@@ -250,8 +250,11 @@ class _Profile extends State<Profile> {
           _isLoading = false;
         });
         print(response.statusCode);
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+              (Route<dynamic> route) => false,
+        );
       }
       else if (response.statusCode == 401){
         setState(() {
